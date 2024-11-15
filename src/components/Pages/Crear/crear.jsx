@@ -60,7 +60,7 @@ export default function Crear() {
     }
   };
 
-  const alertaCrear = () => {
+  /*const alertaCrear = () => {
     Swal.fire({
         title: "Quiere crear la poliza?",
         showDenyButton: true,
@@ -74,7 +74,7 @@ export default function Crear() {
           Swal.fire("Poliza no guardada", "", "info");
         }
       });
-  };
+  };*/
 
   return (
     <div>
@@ -192,7 +192,7 @@ export default function Crear() {
         <Grid item size={3}></Grid>
 
         <Grid item size={6} sx={{ background: "#072040" }}>
-          <Button sx={{ color: "white" }} fullWidth onClick={() =>{crearPoliza}}>
+          <Button sx={{ color: "white" }} fullWidth onClick={crearPoliza}>
             Guardar
           </Button>
         </Grid>
