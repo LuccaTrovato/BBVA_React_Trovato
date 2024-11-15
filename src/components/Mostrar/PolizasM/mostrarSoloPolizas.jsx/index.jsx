@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function MostrarSoloPolizas() {
+export default function     MostrarSoloPolizas() {
   const [poliza, setPoliza] = useState(null);
   const [clientes, setClientes] = useState({});
   const [tipoPolizas, setTipoPolizas] = useState({});
@@ -121,6 +121,7 @@ export default function MostrarSoloPolizas() {
 
   return (
     <Container sx={{ paddingTop: 5 }}>
+        <Typography variant="h2" sx={{background: "#146EA6", justifySelf:"center", mb:2, p:3}}>Polizas</Typography>
       {poliza ? (
         <>
           <TableContainer component={Paper}>
@@ -148,9 +149,7 @@ export default function MostrarSoloPolizas() {
                   <TableCell sx={{ color: "white" }} align="center">
                     Tipo
                   </TableCell>
-                  <TableCell sx={{ color: "white" }} align="center">
-                    Acciones
-                  </TableCell>
+                  
                 </TableRow>
               </TableHead>
               <TableBody>

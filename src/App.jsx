@@ -10,6 +10,7 @@ import Mostrar from "./components/Mostrar/PolizasM/mostrarPoliza";
 import MostrarClientes from "./components/Mostrar/ClientesM/mostarClientes";
 import MostrarTipoPolizas from "./components/Mostrar/TipoPolizaM/mostrarTipoPoliza";
 import Editar from "./components/Pages/Editar/editar";
+import MostrarSoloPolizas from "./components/Mostrar/PolizasM/mostrarSoloPolizas.jsx";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/crear" element={<Crear />} />
             <Route path="/editar/:idPoliza" element={<Editar />} />
-            <Route path="/polizas" element={<Mostrar/>} />
+            <Route path="/polizas" element={<MostrarSoloPolizas/>} />
             <Route path="/clientes" element={<MostrarClientes />} />
             <Route path="/tipoPolizas" element={<MostrarTipoPolizas/>} />
 

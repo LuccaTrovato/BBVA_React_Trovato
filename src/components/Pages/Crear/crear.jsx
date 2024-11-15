@@ -10,6 +10,7 @@ import MostrarClientesIDNombre from "../../Mostrar/ClientesM/MostrarIDNombre/mos
 import MostrarTipoPolizasIDNoombre from "../../Mostrar/TipoPolizaM/MostrarIdTipoPol/mostrarTipoPoliza";
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
+import Swal from "sweetalert2";
 
 export default function Crear() {
   const [polizas, setPolizas] = useState({
@@ -31,11 +32,12 @@ export default function Crear() {
       idTipo: "",
     });
   }, []);
-
+  
   const crearPoliza = async (e) => {
     e.preventDefault();
-    
+
     try {
+      setError(false);
       let response;
       response = await axios.post(
         "http://localhost:8080/api/polizas/crearDTO",
@@ -46,9 +48,8 @@ export default function Crear() {
           },
         }
       );
-      navigate("/home");
-    } catch (error) {
-        setError(true)
+      navigate("/home")
+    } catch (e) {
       setPolizas({
         fechaEmision: "",
         fechaVencimiento: "",
@@ -57,6 +58,22 @@ export default function Crear() {
         idTipo: "",
       });
     }
+  };
+
+  const alertaCrear = () => {
+    Swal.fire({
+        title: "Quiere crear la poliza?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Crear",
+        denyButtonText: `No Crear`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Creada!", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("Poliza no guardada", "", "info");
+        }
+      });
   };
 
   return (
@@ -170,28 +187,23 @@ export default function Crear() {
               setPolizas({ ...polizas, idTipo: value });
             }}
             size="medium"
-
           />
         </Grid>
         <Grid item size={3}></Grid>
 
         <Grid item size={6} sx={{ background: "#072040" }}>
-          <Button
-            sx={{ color: "white" }}
-            fullWidth
-            onClick={
-              crearPoliza
-            }
-          >
+          <Button sx={{ color: "white" }} fullWidth onClick={() =>{crearPoliza}}>
             Guardar
           </Button>
         </Grid>
-
-        
       </Grid>
       <Grid container>
-      <Grid item size={12} sx={{justifyItems:"center"}}>
-            {error && (<Typography variant="h3"> No se cargo la Póliza</Typography>)}
+        <Grid item size={12} sx={{ justifyItems: "center" }}>
+          {error && (
+            <Typography sx={{ background: "red", mt: 3 }} variant="h3">
+              ERROR, No se cargo la Póliza
+            </Typography>
+          )}
         </Grid>
       </Grid>
 

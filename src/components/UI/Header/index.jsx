@@ -18,9 +18,9 @@ export default function Header() {
 
           
 
-          <Grid item size={1} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/polizas')}> Polizas </Button> </Grid>
+          <Grid item size={1} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/polizas')}> Pólizas </Button> </Grid>
           <Grid item size={1} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/clientes')}> Clientes </Button> </Grid>
-          <Grid item size={2} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/tipoPolizas')}> Tipos de polizas</Button></Grid>
+          <Grid item size={2} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/tipoPolizas')}> Tipos de pólizas</Button></Grid>
 
           <Grid item size={1} sx={estilos}></Grid>
           <Grid item size={1} sx={estilos}> <Button sx={{ color: "white" }} onClick={() => navigate('/home')}> HOME </Button> </Grid>

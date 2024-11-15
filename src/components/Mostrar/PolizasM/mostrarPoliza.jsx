@@ -123,19 +123,25 @@ export default function Mostrar() {
 
   const alertaBorrar = (idPoliza) => {
     Swal.fire({
-      title: "Estas seguro ?",
-      text: "You won't be able to revert this!",
+      title: "Estas seguro de borrar la poliza n°"+ idPoliza,
+      text: "No podras revertir esta accion",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "SI, borrarla!",
+      cancelButtonText:"Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         
+        Swal.fire({
+          title: "Poliza Borrada!",
+          text: "La Poliza n°"+idPoliza +" a sido borrada con exito.",
+          icon: "success"
+        });
         borrar(idPoliza)
-      }
-    });
+        
+    }});
   }
 
   return (
@@ -209,22 +215,27 @@ export default function Mostrar() {
                       {traerTipoPoliza(p.idTipo)}
                     </TableCell>
                     <TableCell
-                      sx={{ border: "1px solid white" }}
+                      sx={{ border: "1px solid white"}}
                       align="center"
                     >
                       
+                      
                       <Button
-                        sx={{ background: "#2929FF", color: "white" }}
+                        sx={{ background: "#2929FF", color: "white", mr:3,  }}
                         onClick={() => navigate(`/editar/${p.idPoliza}`)}
                       >
                         Editar
                       </Button>
+                      
+                      
                       <Button
-                        sx={{ background: "#D90404", color: "white" }}
+                        sx={{ background: "#D90404", color: "white"}}
                         onClick={() => {alertaBorrar(p.idPoliza)}}
                       >
                         Borrar
                       </Button>
+                      
+                      
                     </TableCell>
                   </TableRow>
                 ))}

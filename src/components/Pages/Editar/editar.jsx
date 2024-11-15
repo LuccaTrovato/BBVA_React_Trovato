@@ -13,6 +13,8 @@ import * as React from "react";
 import MostrarClientesIDNombre from "../../Mostrar/ClientesM/MostrarIDNombre/mostarClientes";
 import MostrarTipoPolizasIDNoombre from "../../Mostrar/TipoPolizaM/MostrarIdTipoPol/mostrarTipoPoliza";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 export default function Editar() {
   const [polizas, setPolizas] = useState({
@@ -21,7 +23,7 @@ export default function Editar() {
     fechaVencimiento: "",
     monto: "",
     idCliente: "",
-    idTipo: ""
+    idTipo: "",
   });
   const { idPoliza } = useParams();
   const [error, setError] = useState(false);
@@ -33,22 +35,21 @@ export default function Editar() {
       const response = await axios.get(
         `http://localhost:8080/api/polizas/obtener_por_id/${idPoliza}`,
         {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }
-          }
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       setPolizas({
-        idPoliza : response.data.idPoliza,
-        fechaEmision : response.data.fechaEmision,
+        idPoliza: response.data.idPoliza,
+        fechaEmision: response.data.fechaEmision,
         fechaVencimiento: response.data.fechaVencimiento,
         monto: response.data.monto,
         idCliente: response.data.idCliente.id,
         idTipo: response.data.idTipo.idTipoPoliza,
-    })
+      });
     };
 
-    
     traerPolizaId(idPoliza);
   }, []);
 
@@ -60,8 +61,8 @@ export default function Editar() {
         polizas,
         {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
       );
       navigate("/home");
@@ -75,7 +76,26 @@ export default function Editar() {
       fechaVencimiento: "",
       monto: "",
       idCliente: "",
-      idTipo: ""
+      idTipo: "",
+    });
+
+    
+  };
+  const alertaEditar = (idPoliza) => {
+    Swal.fire({
+      title: "Desea actualizar la poliza?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Actualizar",
+      denyButtonText: `No Actualizar`,
+      cancelButtonText:"Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Actualizada!", "", "success");
+        editar(idPoliza);
+      } else if (result.isDenied) {
+        Swal.fire("No se actualizo", "", "info");
+      }
     });
   };
 
@@ -90,7 +110,7 @@ export default function Editar() {
           marginLeft: 30,
           marginRight: 30,
           justifyContent: "center",
-          p: 3
+          p: 3,
         }}
       >
         <Grid item size={12} sx={{ justifyItems: "center" }} fullWidth>
@@ -104,7 +124,6 @@ export default function Editar() {
         <Grid item size={3}></Grid>
 
         <Grid item size={6}>
-
           <TextField
             fullWidth
             sx={{ background: "#C4E5F2" }}
@@ -112,13 +131,14 @@ export default function Editar() {
             label="ID Poliza"
             type="number"
             slotProps={{
-                input: {
-                  readOnly: true,
-                },
-              }}
-            
+              input: {
+                readOnly: true,
+              },
+            }}
             value={polizas.idPoliza}
-            onChange={e => setPolizas({ ...polizas, idPoliza: e.target.value })}
+            onChange={(e) =>
+              setPolizas({ ...polizas, idPoliza: e.target.value })
+            }
           />
         </Grid>
         <Grid item size={3}></Grid>
@@ -131,7 +151,7 @@ export default function Editar() {
             label="Fecha de Emisión"
             value={polizas.fechaEmision}
             size="small"
-            onChange={e =>
+            onChange={(e) =>
               setPolizas({ ...polizas, fechaEmision: e.target.value })
             }
           />
@@ -145,7 +165,7 @@ export default function Editar() {
             label="Fecha de Vencimiento"
             value={polizas.fechaVencimiento}
             size="small"
-            onChange={e =>
+            onChange={(e) =>
               setPolizas({ ...polizas, fechaVencimiento: e.target.value })
             }
           />
@@ -159,7 +179,7 @@ export default function Editar() {
             label="Monto"
             type="number"
             value={polizas.monto}
-            onChange={e => setPolizas({ ...polizas, monto: e.target.value })}
+            onChange={(e) => setPolizas({ ...polizas, monto: e.target.value })}
           />
         </Grid>
         <Grid item size={3}></Grid>
@@ -172,7 +192,7 @@ export default function Editar() {
             id="outlined-number"
             label="ID Cliente"
             type="number"
-            onChange={e =>
+            onChange={(e) =>
               setPolizas({ ...polizas, idCliente: e.target.value })
             }
             value={polizas.idCliente}
@@ -188,7 +208,7 @@ export default function Editar() {
             id="outlined-number"
             label="ID Tipo"
             type="number"
-            onChange={e => setPolizas({ ...polizas, idTipo: e.target.value })}
+            onChange={(e) => setPolizas({ ...polizas, idTipo: e.target.value })}
             value={polizas.idTipo}
           />
         </Grid>
@@ -199,7 +219,7 @@ export default function Editar() {
             sx={{ color: "white" }}
             type="submit"
             fullWidth
-            onClick={() => editar(polizas.idPoliza)}
+            onClick={() => alertaEditar(polizas.idPoliza)}
           >
             Guardar
           </Button>

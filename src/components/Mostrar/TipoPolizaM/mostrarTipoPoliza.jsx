@@ -42,6 +42,7 @@ export default function MostrarTipoPolizas() {
     return (
 
         <Container sx={{ paddingTop: 5 }}>
+            <Typography variant="h2" sx={{background: "#146EA6", justifySelf:"center", mb:2, p:3}}>Tipo de Polizas</Typography>
             {tipoPolizas ? (
                 <>
 
