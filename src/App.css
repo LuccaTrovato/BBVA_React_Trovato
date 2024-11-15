@@ -1,0 +1,12 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color:white;
+}
+
+body{
+  background: #25b2ea;
+  margin-bottom: 120px;
+}
+
