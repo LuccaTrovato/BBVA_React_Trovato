@@ -14,6 +14,8 @@ import MostrarClientesIDNombre from "../../Mostrar/ClientesM/MostrarIDNombre/mos
 import MostrarTipoPolizasIDNoombre from "../../Mostrar/TipoPolizaM/MostrarIdTipoPol/mostrarTipoPoliza";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { NumericFormat } from "react-number-format";
+
 
 
 export default function Editar() {
@@ -99,6 +101,10 @@ export default function Editar() {
     });
   };
 
+
+  console.log(polizas);
+  
+
   return (
     <div>
       <Grid
@@ -172,44 +178,69 @@ export default function Editar() {
         </Grid>
         <Grid item size={3}></Grid>
         <Grid item size={6}>
-          <TextField
+        <NumericFormat
             fullWidth
             sx={{ background: "#C4E5F2" }}
-            id="outlined-number"
             label="Monto"
-            type="number"
+            allowNegative={false}
             value={polizas.monto}
-            onChange={(e) => setPolizas({ ...polizas, monto: e.target.value })}
+            thousandSeparator="."
+            customInput={TextField}
+            decimalSeparator=","
+            decimalScale={0}
+            fixedDecimalScale
+            displayType="input"
+            onValueChange={(values) => {
+              const { value } = values;
+              setPolizas({ ...polizas, monto: value });
+            }}
+            size="medium"
           />
         </Grid>
         <Grid item size={3}></Grid>
         <Grid item size={3}></Grid>
 
         <Grid item size={6}>
-          <TextField
+        <NumericFormat
             fullWidth
             sx={{ background: "#C4E5F2" }}
-            id="outlined-number"
             label="ID Cliente"
-            type="number"
-            onChange={(e) =>
-              setPolizas({ ...polizas, idCliente: e.target.value })
-            }
+            allowNegative={false}
             value={polizas.idCliente}
+            thousandSeparator="."
+            customInput={TextField}
+            decimalSeparator=","
+            decimalScale={0}
+            fixedDecimalScale
+            displayType="input"
+            onValueChange={(values) => {
+              const { value } = values;
+              setPolizas({ ...polizas, idCliente: value });
+            }}
+            size="medium"
           />
         </Grid>
         <Grid item size={3}></Grid>
         <Grid item size={3}></Grid>
 
         <Grid item size={6}>
-          <TextField
+        <NumericFormat
             fullWidth
             sx={{ background: "#C4E5F2" }}
-            id="outlined-number"
-            label="ID Tipo"
-            type="number"
-            onChange={(e) => setPolizas({ ...polizas, idTipo: e.target.value })}
+            label="ID Tipo de Poliza"
+            allowNegative={false}
             value={polizas.idTipo}
+            thousandSeparator="."
+            customInput={TextField}
+            decimalSeparator=","
+            decimalScale={0}
+            fixedDecimalScale
+            displayType="input"
+            onValueChange={(values) => {
+              const { value } = values;
+              setPolizas({ ...polizas, idTipo: value });
+            }}
+            size="medium"
           />
         </Grid>
         <Grid item size={3}></Grid>
